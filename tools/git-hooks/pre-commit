@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Installed via: git config core.hooksPath tools/git-hooks
+# Refuses commits that stage RimWorld-owned content or decompiler output.
+exec "$(git rev-parse --show-toplevel)/tools/asset-guard/guard.sh" staged

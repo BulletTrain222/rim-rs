@@ -1,0 +1,9 @@
+# Copy this file to `config.toml` (gitignored) and point it at your own,
+# legally obtained RimWorld installation: the folder that contains
+# `Version.txt` and `Data/Core`.
+#
+# The path can also be given with `--rimworld <path>` or the RIMWORLD_PATH
+# environment variable (both take precedence over this file).
+
+[rimworld]
+path = "C:/Program Files (x86)/Steam/steamapps/common/RimWorld"

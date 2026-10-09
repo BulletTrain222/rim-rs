@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Audits the complete history (all refs) before anything leaves this machine.
+exec "$(git rev-parse --show-toplevel)/tools/asset-guard/guard.sh" history

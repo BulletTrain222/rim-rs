@@ -1,0 +1,144 @@
+# =============================================================================
+# WHITELIST-STYLE .gitignore
+#
+# Everything is ignored by default. Only paths explicitly re-included below can
+# be tracked. Anything generated from or copied out of RimWorld is treated as
+# private/local unless explicitly proven safe to publish.
+#
+# Before adding a new top-level entry here, ask: could a game file, a decompiler
+# output, or a dump ever end up inside it? If yes, do not whitelist it.
+#
+# The pre-commit hook (tools/git-hooks/pre-commit) is the second line of
+# defence; see docs/provenance.md.
+# =============================================================================
+
+# 1. Ignore every top-level entry (this covers RimWorld/, local/, target/, ...)
+/*
+
+# 2. Re-include the project skeleton
+!/.gitignore
+!/.gitattributes
+!/.github/
+!/README.md
+!/LICENSE-MIT
+!/LICENSE-APACHE
+!/THIRD_PARTY_NOTICES.md
+!/Cargo.toml
+!/Cargo.lock
+!/config.example.toml
+!/rustfmt.toml
+!/crates/
+!/docs/
+!/tests/
+!/tools/
+
+# Explicitly local-only (already covered by `/*`; listed for clarity).
+/target/
+/local/
+/research_queue/
+/saves/
+/RimWorld/
+
+# 3. Inside whitelisted directories, block anything that looks like game
+#    content, decompiler output, dumps, binaries or build products.
+target/
+**/research_queue/
+**/traces/
+**/probe*/
+**/saves/
+**/screenshots/
+**/local/
+**/research/
+**/game/
+**/decompiled/
+**/RimWorld/
+**/Data/Core/
+**/Defs/
+
+# Executables, libraries, debug info
+*.exe
+*.dll
+*.pdb
+*.so
+*.dylib
+*.mdb
+*.il
+
+# Unity / game data containers
+*.assets
+*.resS
+*.resource
+*.bundle
+*.unity3d
+globalgamemanagers*
+level[0-9]*
+
+# Decompiler projects / output / C# sources
+*.cs
+*.csproj
+*.sln
+*.ilspy*
+*.dnspy*
+*.dotpeek*
+
+# Dumps
+*.dmp
+*.mdmp
+*.dump
+*.core
+
+# Textures, images, audio, fonts
+*.png
+*.jpg
+*.jpeg
+*.dds
+*.psd
+*.tga
+*.bmp
+*.gif
+*.webp
+*.ogg
+*.wav
+*.mp3
+*.flac
+*.ttf
+*.otf
+*.fnt
+
+# XML (RimWorld Defs/Languages are XML). Only synthetic test fixtures allowed.
+*.xml
+
+# Archives (RimWorld ships language packs as .tar)
+*.tar
+*.zip
+*.7z
+*.rar
+*.gz
+
+# Logs, traces, crash output
+*.log
+*.trace
+*.etl
+*.crash
+
+# Local configuration (contains a machine-specific install path)
+config.toml
+*.local.toml
+.env
+
+# Editor / OS noise
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 4. Narrow, explicit exceptions
+#    Synthetic XML fixtures written by hand for this project. Each must carry
+#    the marker comment `synthetic-fixture` (enforced by the pre-commit hook).
+!/tests/fixtures/**/*.xml
+!/crates/*/tests/fixtures/**/*.xml
+#    Our own screenshots / diagrams for documentation. Review every image by
+#    hand: screenshots must not be used to redistribute game textures.
+!/docs/images/*.png

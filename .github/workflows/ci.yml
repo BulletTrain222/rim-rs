@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  asset-audit:
+    # Fails if any commit in history contains game files or decompiler output.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: bash tools/asset-guard/guard.sh history
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - name: Install Bevy system dependencies
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libasound2-dev libudev-dev libwayland-dev libxkbcommon-dev
+      - run: cargo fmt --all --check
+      # No RimWorld install in CI: real-install tests skip themselves.
+      - run: cargo test --workspace
+      - run: cargo clippy --workspace --all-targets -- -D warnings

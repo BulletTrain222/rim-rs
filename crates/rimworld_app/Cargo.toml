@@ -1,0 +1,16 @@
+[package]
+name = "rimworld_app"
+description = "Bevy front-end: rendering, camera, input and selection"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+rimworld_assets.workspace = true
+rimworld_defs.workspace = true
+rimworld_sim.workspace = true
+bevy.workspace = true
+
+[lints]
+workspace = true

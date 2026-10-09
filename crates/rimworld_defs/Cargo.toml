@@ -1,0 +1,18 @@
+[package]
+name = "rimworld_defs"
+description = "Loads RimWorld XML Defs: parsing, inheritance, Def database, typed Defs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+roxmltree.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+rimworld_assets.workspace = true
+
+[lints]
+workspace = true
